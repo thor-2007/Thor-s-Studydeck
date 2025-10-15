@@ -1,0 +1,547 @@
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+ 
+html{
+    zoom: 150%;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Ubuntu", serif;
+    font-weight: 300;
+    font-style: normal;
+}
+ 
+.dynapuff-font {
+    font-family: "DynaPuff", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+}
+ 
+b,
+strong {
+    font-family: "Ubuntu", serif;
+    font-weight: 700;
+    font-style: normal;
+}
+ 
+i {
+    font-family: "Ubuntu", serif;
+    font-weight: 400;
+    font-style: italic;
+}
+ 
+html,
+body {
+    margin: unset;
+    padding: unset;
+    height: 100%;
+    min-height: 100%;
+    width: 100%;
+    min-width: 100%;
+    overflow: auto;
+}
+ 
+body {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff784;
+    user-select: none;
+}
+ 
+#main-container {
+    width: 100%;
+    max-height: 100%;
+    max-width: 80%;
+    padding: 15px 15px;
+}
+ 
+.app-title {
+    margin-bottom: 30px;
+    font-weight: 700;
+    text-align: center;
+    font-size: 40px;
+    text-shadow: 3px 0px 0px #ff0066;
+}
+ 
+.flashcards {
+    width: 100%;
+    display: inline-grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, calc((100% - 2rem) / 3));
+    align-items: center;
+    justify-content: center;
+    padding: 15px 0;
+}
+ 
+@media (max-width: 900px) {
+    div.flashcards {
+        grid-template-columns: repeat(auto-fit, calc((100% - 1rem) / 2));
+    }
+}
+ 
+@media (max-width: 600px) {
+    div.flashcards {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+
+@media (max-width: 600px){
+    .flashcard-action{
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+
+
+/* Responsive for mobile */
+@media (max-width: 600px) {
+    .darkmode-ikon {
+        width: 32px !important;
+        height: 32px !important;
+        top: 0 !important;
+        right: 0 !important;
+    }
+    .ikonBakgrunn {
+        padding: 17px !important;
+        width: 30px !important;
+        height: 30px !important;
+        border-radius: 12px !important;
+    }
+}
+
+@media (max-width: 500px){
+    .app-title{
+        font-size: 30px !important;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+ 
+.flashcards:empty:before {
+    display: block;
+    position: relative;
+    content: "Du har ingen flashcards enda...";
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    color: #c8c5c5;
+}
+ 
+.flashcards .card {
+    background-color: transparent;
+    width: 100%;
+    height: 300px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+ 
+.flashcards .card.active .card-container {
+    transform: rotateY(180deg);
+}
+ 
+.flashcards .card .card-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+ 
+.flashcards .card .card-front,
+.flashcards .card .card-back {
+    position: absolute;
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 3px 3px 4px #00000087;
+    padding: 15px 5px;
+}
+.flashcards .card .card-front-title,
+.flashcards .card .card-back-title{
+    letter-spacing: 1px;
+}
+ 
+.flashcards .card .card-front-text,
+.flashcards .card .card-back-text{
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+ 
+.flashcards .card .card-front {
+    background-color: #2E5077;
+    color: #fff;
+}
+ 
+.flashcards .card .card-back {
+    background-color: #629cb8;
+    color: white;
+    transform: rotateY(180deg);
+    
+}
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+button.card-action {
+    background: #F95454;
+    color: #fff;
+    border: unset;
+    outline: unset;
+    cursor: pointer;
+    border-radius: 3px;
+    box-shadow: 1px 2px 3px #00000087;
+
+}
+ 
+button.card-action:hover, button.card-action:active{
+    background: #b22d2d;
+}
+
+
+button.card-edit {
+    background: #0556be;
+    color: #fff;
+    border: unset;
+    outline: unset;
+    cursor: pointer;
+    border-radius: 3px;
+    box-shadow: 1px 2px 3px #00000087;
+}
+
+button.card-edit:hover, button.card-edit:active{
+    background: #103668;
+}
+
+
+
+
+.flashcards .card .card-edit-action {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+div#form-modal {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: all .5s ease-in-out;
+}
+ 
+div#form-modal.shown {
+    display: block;
+    opacity: 1;
+}
+ 
+div#form-modal .form-modal-backdrop {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: #000000c2;
+    backdrop-filter: blur(2px);
+    align-items: center;
+    justify-content: center;
+}
+ 
+div#form-modal .form-modal-dialog {
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px 10px;
+}
+ 
+div#form-modal .form-modal-dialog .form-modal-title {
+    margin: unset;
+}
+ 
+button.form-modal-close {
+    background: transparent;
+    border: unset;
+    cursor: pointer;
+    position: relative;
+    float: right;
+}
+.form-group {
+    position: relative;
+    width: 100%;
+    padding: 5px 0px;
+}
+label.form-label {
+    display: block;
+    width: 100%;
+    font-weight: 400;
+    color: #434343;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+ 
+.form-control {
+    width: 100%;
+    resize: none;
+    border-color: #848383;
+    border-radius: 2px;
+    outline: unset;
+}
+ 
+.form-group-action {
+    position: relative;
+    width: 100%;
+    padding: 5px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ 
+button#btn-new-flashcard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2E5077;
+    color: #fff;
+    padding: 5px 25px;
+    border: unset;
+    border-radius: 3px;
+    font-weight: 500;
+    cursor: pointer;
+    float: right;
+    box-shadow: 1px 2px 3px #00000087;
+}
+ 
+button.btn-form-action {
+    background: #0556be;
+    color: #fff;
+    padding: 5px 25px;
+    border: unset;
+    border-radius: 3px;
+    font-weight: 500;
+    cursor: pointer;
+}
+ 
+button.btn-form-action:hover, button.btn-form-action:active{
+    background: #103668;
+}
+
+
+
+#export-btn, #import-btn {
+    background: #6852b7;
+    color: #fff;
+    padding: 5px 3px;
+    border: unset;
+    border-radius: 3px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    box-shadow: 1px 2px 3px #00000087;
+}
+
+#folder-filter.form-control {
+    background: #858585;
+    color: #fff;
+    padding: 5px 25px;
+    border: unset;
+    border-radius: 3px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 1px 2px 3px #00000087;
+}
+
+
+/* Dark mode */
+
+.dark-mode {
+  transition: background-color 0.5s ease, color 0.5s ease;
+
+  background-color: black;
+  color: white;
+  
+}
+
+.ikonBakgrunn{
+    z-index: 10;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    padding: 25px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    margin-right: 20px;
+    border: 2px solid black;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 1px 2px 3px #00000087
+}
+.ikonBakgrunn:hover{
+    background-color: rgb(209, 209, 209);
+    transform: scale(1.13)
+}
+.ikonBakgrunn.active {
+    background-color: rgb(71, 71, 71);
+}
+
+
+.darkmode-ikon {
+    width: 50px;
+    height: 50px;
+    top: 0;
+    right: 0;
+    position: absolute;
+    cursor: pointer;
+    
+}
+
+
+
+
+
+
+
+
+
+/* Scrollbar styling */
+/* width */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #3f6da0; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #26405e; 
+}
+
+
+
+
+
+/* Justering av flashcard tekst for å unngå overflow */
+
+.flashcards .card .card-front-text,
+.flashcards .card .card-back-text {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    /* Legg til disse linjene: */
+    overflow: auto;
+    max-height: 180px; /* Juster etter behov, men mindre enn kortets høyde */
+    width: 100%;
+    word-break: break-word;
+}
+
+.flashcards .card .card-back-action {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 2;
+}
+
+.flashcards .card .card-front,
+.flashcards .card .card-back {
+    position: absolute;
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 3px 3px 4px #00000087;
+    padding: 15px 5px;
+}
+
+
+
+#delete-folder-btn{
+    background:#F95454; 
+    color:#fff; 
+    border: none; 
+    border-radius: 3px; 
+    cursor: pointer;
+    outline: unset;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+

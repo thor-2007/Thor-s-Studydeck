@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thor's StudyDeck</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <div id="main-container">
+        <h1 class="app-title">Thor's StudyDeck</h1>
+
+
+        <div class="ikonBakgrunn" onclick="darkmodeFunksjon()">
+            <img src="/icons/day-and-night.png" class="darkmode-ikon">
+        </div>
+
+        <div style="margin: 10px 0;">
+            <button id="export-btn">Eksporter flashcards</button>
+            <input type="file" id="import-file" style="display:none;">
+            <button id="import-btn">Importer flashcards</button>
+        </div>
+
+        <div class="flashcard-action" style="display: flex; align-items: center; gap: 10px;">
+            <select id="folder-filter" class="form-control" style="max-width:200px;">
+                <option value="">Alle mapper</option>
+            </select>
+
+
+            <button id="delete-folder-btn" style="box-shadow: 1px 2px 3px #00000087">
+                <span class="material-symbols-outlined">delete</span>
+                Slett mappe
+            </button>
+
+            <button id="btn-new-flashcard">
+                <span class="material-symbols-outlined">add</span>
+                Lag Ny Flashcard
+            </button>
+        </div>
+        
+        <div>
+    <div>
+    </div>
+</div>
+        <div class="flashcards"></div>
+
+        <p style="font-weight: 600; font-size: 15px; text-align: center; padding-bottom: 10px;">© 2025 Thor Alexander Ånderå. Alle rettigheter forbeholdes.</p>
+
+    </div>
+    <div id="form-modal">
+        <div class="form-modal-backdrop">
+            <div class="form-modal-dialog">
+
+                <button class="form-modal-close dynapuff-font">X</button>
+                <h4 class="form-modal-title dynapuff-font"><strong style="color: black;">Lag Ny Flashcard</strong></h4>
+
+                <form action="" id="flashcard-form">
+
+
+
+
+                    <div class="form-group">
+                        <label for="color" class="form-label">Velg farge:</label>
+                        <input type="color" id="color" name="color" value="#2E5077">
+                    </div>
+                    <div class="form-group">
+                        <label for="backcolor" class="form-label">Farge bakside:</label>
+                        <input type="color" id="backcolor" name="backcolor" value="#629cb8">
+                    </div>
+
+
+
+
+
+
+
+                    <input type="hidden" id="fc_id">
+                    <div class="form-group">
+                        <label for="question" class="form-label">Flashcard Spørsmål:</label>
+                        <textarea id="question" name="question" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="answer" class="form-label">Flashcard Svar:</label>
+                        <textarea id="answer" name="answer" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="folder" class="form-label">Mappe:</label>
+                        <input type="text" id="folder" name="folder" class="form-control" placeholder="F.eks. Matte, Religion" list="folder-list">
+                        <datalist id="folder-list"></datalist>
+                    </div>
+                    <div class="form-group-action">
+                        <button class="btn-form-action">Lagre</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
