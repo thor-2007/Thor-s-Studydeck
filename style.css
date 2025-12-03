@@ -4,6 +4,8 @@ html{
     zoom: 150%;
 }
 
+
+
 * {
     box-sizing: border-box;
     font-family: "Ubuntu", serif;
@@ -176,7 +178,7 @@ body {
     backface-visibility: hidden;
     overflow: hidden;
     border-radius: 5px;
-    box-shadow: 3px 3px 4px #00000087;
+    box-shadow: 6px 6px 7px #00000087;
     padding: 15px 5px;
 }
 .flashcards .card .card-front-title,
@@ -560,3 +562,63 @@ button.btn-form-action:hover, button.btn-form-action:active{
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Edit mode - OPPDATERT */
+.flashcards.edit-mode {
+    pointer-events: auto;
+}
+
+.flashcards.edit-mode .card {
+    cursor: grab;
+    opacity: 1;
+    transition: opacity 0.1s, background-color 0.1s;
+}
+
+.flashcards.edit-mode .card:hover {
+    opacity: 0.9;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.flashcards.edit-mode .card.dragging {
+    opacity: 0.3;
+    cursor: grabbing;
+    background-color: rgba(0, 0, 0, 0.2);
+    transform: scale(0.95) rotate(2deg);
+}
+
+.flashcards.edit-mode .card.drag-over {
+    background-color: rgba(7, 86, 190, 0.2);
+    border: 2px solid #0556be;
+}
+
+#edit-order-btn {
+    background: #2E5077;
+    color: #fff;
+    padding: 5px 15px;
+    border: unset;
+    border-radius: 3px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 1px 2px 3px #00000087;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.2s;
+}
+
+#edit-order-btn.active {
+    background-color: #28a745;
+}

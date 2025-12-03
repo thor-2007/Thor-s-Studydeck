@@ -1,4 +1,4 @@
-const flashcard_item = $(`<div class="card">
+const flashcard_item = $(`<div class="card" draggable="true">
 <div class="card-container">
     <div class="card-front">
         <h4 class="card-front-title dynapuff-font">Spørsmål</h4>
@@ -351,3 +351,113 @@ $('#delete-folder-btn').click(function () {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ...existing code...
+let isEditMode = false;
+let draggedCard = null;
+
+$('#edit-order-btn').click(function() {
+    isEditMode = !isEditMode;
+    
+    if (isEditMode) {
+        flashcardContainer.addClass('edit-mode');
+        $(this).addClass('active').text('✓ Ferdig');
+    } else {
+        flashcardContainer.removeClass('edit-mode');
+        $(this).removeClass('active').text('Rediger rekkefølge');
+        saveCardOrder();
+    }
+});
+
+function swapElements(a, b) {
+    // a and b are DOM elements (or jQuery-wrapped)
+    const $a = $(a), $b = $(b);
+    if ($a[0] === $b[0]) return;
+    // placeholder trick - robust for neighbors and distant elements
+    const $placeholder = $('<div>').hide();
+    $a.before($placeholder);
+    $b.before($a);
+    $placeholder.replaceWith($b);
+}
+
+$(document).on('dragstart', '.flashcards.edit-mode .card', function(e) {
+    if (!isEditMode) return;
+    draggedCard = this;
+    $(this).addClass('dragging');
+    e.originalEvent.dataTransfer.effectAllowed = 'move';
+    // optional: lightweight data so some browsers allow drop
+    try { e.originalEvent.dataTransfer.setData('text/plain', 'drag'); } catch(e){}
+});
+
+// swap on hover — when dragging and you hover over another card, swap them
+$(document).on('dragenter', '.flashcards.edit-mode .card', function(e) {
+    if (!isEditMode || !draggedCard) return;
+    if (this === draggedCard) return;
+    // perform swap
+    swapElements(draggedCard, this);
+    // update reference to draggedCard because it moved to the new position
+    // find the element still representing the dragged card (same data-id)
+    const draggedId = $(draggedCard).attr('data-id');
+    draggedCard = $(`.flashcards .card[data-id='${draggedId}']`)[0];
+});
+
+$(document).on('dragover', '.flashcards.edit-mode .card', function(e) {
+    if (!isEditMode || !draggedCard) return;
+    e.preventDefault(); // allow drop
+    e.originalEvent.dataTransfer.dropEffect = 'move';
+});
+
+$(document).on('dragleave', '.flashcards.edit-mode .card', function(e) {
+    if (!isEditMode) return;
+    // no-op; visual feedback handled by CSS
+});
+
+$(document).on('drop', '.flashcards.edit-mode .card', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    // nothing else needed — swaps already applied on dragenter
+});
+
+$(document).on('dragend', '.flashcards.edit-mode .card', function(e) {
+    if (draggedCard) {
+        $($('.flashcards .card')).removeClass('dragging');
+    }
+    draggedCard = null;
+});
+
+function saveCardOrder() {
+    const cardIds = [];
+    $('.flashcards .card').each(function() {
+        const id = $(this).attr('data-id');
+        if (id) cardIds.push(id);
+    });
+    
+    const newFCData = [];
+    cardIds.forEach(id => {
+        const card = FCData.find(c => c.id == id);
+        if (card) {
+            newFCData.push(card);
+        }
+    });
+    
+    FCData = newFCData;
+    localStorage.setItem('fc_data', JSON.stringify(FCData));
+    alert('Rekkefølgen er lagret!');
+}
+// ...existing code...
