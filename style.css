@@ -85,7 +85,7 @@ body {
     }
 }
  
-@media (max-width: 600px) {
+@media (max-width: 877px) {
     div.flashcards {
         grid-template-columns: 1fr;
     }
@@ -95,7 +95,7 @@ body {
 
 
 
-@media (max-width: 600px){
+@media (max-width: 877px){
     .flashcard-action{
         flex-direction: column;
         gap: 5px;
@@ -622,3 +622,81 @@ button.btn-form-action:hover, button.btn-form-action:active{
 #edit-order-btn.active {
     background-color: #28a745;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ...existing code... */
+
+.grid-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 3px;
+    padding: 4px 6px;               /* mindre padding */
+    border-radius: 8px;
+    background: rgba(46,80,119);/* subtle theme tint */
+    border: 1px solid rgba(46,80,119,0.08);
+    box-shadow: 0 6px 14px rgba(46,80,119,0.04);
+    color: #000000;
+    min-height: 36px;
+}
+
+/* label + select */
+.grid-control label {
+    margin: 0;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+.grid-control select.form-control {
+    padding: 6px 8px;
+    border-radius: 6px;
+    min-width: 22px;
+    -webkit-appearance: none;
+    appearance: none;
+    font-weight: 500;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0);
+    cursor: pointer;
+    transition: box-shadow .12s ease, transform .08s ease;
+    font-size: 13px;
+}
+.grid-control select.form-control:focus {
+    box-shadow: 0 8px 22px rgba(46,80,119,0.12);
+    outline: none;
+}
+

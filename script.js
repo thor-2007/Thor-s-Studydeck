@@ -450,3 +450,68 @@ function saveCardOrder() {
     alert('Rekkefølgen er lagret!');
 }
 // ...existing code...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// grid layout toggle
+
+// ...existing code...
+
+// Grid/columns control: set layout and persist
+const columnsSelect = $('#columns-select');
+
+function applyGridLayout(value) {
+    if (!value || value === 'auto') {
+        // responsive auto-fit with minimum card width
+        flashcardContainer.css('grid-template-columns', 'repeat(auto-fit, minmax(250px, 1fr))');
+    } else {
+        // fixed number of columns
+        const n = Number(value) || 3;
+        flashcardContainer.css('grid-template-columns', `repeat(${n}, 1fr)`);
+    }
+}
+
+// load saved preference
+const savedCols = localStorage.getItem('fc_grid_cols') || 'auto';
+columnsSelect.val(savedCols);
+applyGridLayout(savedCols);
+
+// update on change and save
+columnsSelect.change(function () {
+    const v = $(this).val();
+    localStorage.setItem('fc_grid_cols', v);
+    applyGridLayout(v);
+});
+
+// ensure layout reapplied after load_flashcards (optional)
+// if you re-render flashcards and your JS resets styles, call applyGridLayout again
+$(document).on('fc:afterLoad', function () {
+    applyGridLayout(localStorage.getItem('fc_grid_cols') || 'auto');
+});
+
+// if you already call load_flashcards() on ready, then applyGridLayout(savedCols) above is enough
+
+// ...existing code...
