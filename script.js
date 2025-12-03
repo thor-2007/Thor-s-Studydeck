@@ -366,15 +366,13 @@ $('#delete-folder-btn').click(function () {
 
 
 
-
-
 // ...existing code...
 let isEditMode = false;
 let draggedCard = null;
 
 $('#edit-order-btn').click(function() {
     isEditMode = !isEditMode;
-    
+    console.debug('Edit mode toggled:', isEditMode);
     if (isEditMode) {
         flashcardContainer.addClass('edit-mode');
         $(this).addClass('active').text('✓ Ferdig');
@@ -386,58 +384,52 @@ $('#edit-order-btn').click(function() {
 });
 
 function swapElements(a, b) {
-    // a and b are DOM elements (or jQuery-wrapped)
     const $a = $(a), $b = $(b);
     if ($a[0] === $b[0]) return;
-    // placeholder trick - robust for neighbors and distant elements
     const $placeholder = $('<div>').hide();
     $a.before($placeholder);
     $b.before($a);
     $placeholder.replaceWith($b);
+    console.debug('Swapped', $a.attr('data-id'), '↔', $b.attr('data-id'));
 }
 
 $(document).on('dragstart', '.flashcards.edit-mode .card', function(e) {
     if (!isEditMode) return;
     draggedCard = this;
     $(this).addClass('dragging');
+    console.debug('dragstart', $(this).attr('data-id'));
     e.originalEvent.dataTransfer.effectAllowed = 'move';
-    // optional: lightweight data so some browsers allow drop
-    try { e.originalEvent.dataTransfer.setData('text/plain', 'drag'); } catch(e){}
+    try { e.originalEvent.dataTransfer.setData('text/plain', 'drag'); } catch(e){ console.warn(e); }
 });
 
-// swap on hover — when dragging and you hover over another card, swap them
 $(document).on('dragenter', '.flashcards.edit-mode .card', function(e) {
     if (!isEditMode || !draggedCard) return;
     if (this === draggedCard) return;
-    // perform swap
+    console.debug('dragenter target', $(this).attr('data-id'));
     swapElements(draggedCard, this);
-    // update reference to draggedCard because it moved to the new position
-    // find the element still representing the dragged card (same data-id)
     const draggedId = $(draggedCard).attr('data-id');
     draggedCard = $(`.flashcards .card[data-id='${draggedId}']`)[0];
 });
 
 $(document).on('dragover', '.flashcards.edit-mode .card', function(e) {
     if (!isEditMode || !draggedCard) return;
-    e.preventDefault(); // allow drop
+    e.preventDefault();
     e.originalEvent.dataTransfer.dropEffect = 'move';
 });
 
 $(document).on('dragleave', '.flashcards.edit-mode .card', function(e) {
-    if (!isEditMode) return;
-    // no-op; visual feedback handled by CSS
+    // no-op
 });
 
 $(document).on('drop', '.flashcards.edit-mode .card', function(e) {
     e.preventDefault();
     e.stopPropagation();
-    // nothing else needed — swaps already applied on dragenter
+    console.debug('drop on', $(this).attr('data-id'));
 });
 
 $(document).on('dragend', '.flashcards.edit-mode .card', function(e) {
-    if (draggedCard) {
-        $($('.flashcards .card')).removeClass('dragging');
-    }
+    console.debug('dragend');
+    $('.flashcards .card').removeClass('dragging');
     draggedCard = null;
 });
 
@@ -447,15 +439,12 @@ function saveCardOrder() {
         const id = $(this).attr('data-id');
         if (id) cardIds.push(id);
     });
-    
+    console.debug('save order', cardIds);
     const newFCData = [];
     cardIds.forEach(id => {
         const card = FCData.find(c => c.id == id);
-        if (card) {
-            newFCData.push(card);
-        }
+        if (card) newFCData.push(card);
     });
-    
     FCData = newFCData;
     localStorage.setItem('fc_data', JSON.stringify(FCData));
     alert('Rekkefølgen er lagret!');
