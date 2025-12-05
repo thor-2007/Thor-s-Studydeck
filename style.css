@@ -186,16 +186,58 @@ body {
     letter-spacing: 1px;
 }
  
-.flashcards .card .card-front-text,
-.flashcards .card .card-back-text{
-    flex-grow: 1;
+
+
+
+
+
+
+
+
+
+
+
+
+/* tekstfelt inne i kort - starter øverst og blir scrollbart */
+.flashcards .card .card-front,
+.flashcards .card .card-back {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-    font-size: 12px;
-    letter-spacing: 1px;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    overflow: hidden;
+    border-radius: 5px;
+    padding: 15px 10px;
+    box-sizing: border-box;
 }
+
+/* selve tekstområdet: fleksbar, kan krympes og scrolles */
+.flashcards .card .card-front-text,
+.flashcards .card .card-back-text {
+    flex: 1 1 auto;            /* vokser og krymper innen kortet */
+    min-height: 0;             /* viktig: tillater at flex-itemet krymper */
+    overflow: auto;            /* scrollbar når nødvendig */
+    -webkit-overflow-scrolling: touch;
+    padding: 8px;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: left;
+    word-break: break-word;
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+
+
+
  
 .flashcards .card .card-front {
     background-color: #2E5077;
@@ -223,6 +265,9 @@ body {
 
 button.card-action {
     background: #F95454;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
     color: #fff;
     border: unset;
     outline: unset;
@@ -513,7 +558,7 @@ button.btn-form-action:hover, button.btn-form-action:active{
 .flashcards .card .card-back-text {
     flex-grow: 1;
     display: flex;
-    align-items: center;
+    
     justify-content: center;
     padding: 5px;
     font-size: 12px;
@@ -525,27 +570,8 @@ button.btn-form-action:hover, button.btn-form-action:active{
     word-break: break-word;
 }
 
-.flashcards .card .card-back-action {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    z-index: 2;
-}
 
-.flashcards .card .card-front,
-.flashcards .card .card-back {
-    position: absolute;
-    display: flex;
-    flex-flow: column wrap;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    overflow: hidden;
-    border-radius: 5px;
-    box-shadow: 3px 3px 4px #00000087;
-    padding: 15px 5px;
-}
+
 
 
 

@@ -162,6 +162,7 @@ function load_flashcards() {
     var selectedFolder = folderFilter.val();
     var filtered = FCData;
 
+    
 
     
     if (selectedFolder) {
@@ -181,10 +182,9 @@ function load_flashcards() {
         fc_item.find('.card-front').css('background-color', data.color || '#2E5077');
         fc_item.find('.card-back').css('background-color', data.backcolor || '#629cb8');
 
+        
 
-
-
-
+    
 
 
             
@@ -515,3 +515,18 @@ $(document).on('fc:afterLoad', function () {
 // if you already call load_flashcards() on ready, then applyGridLayout(savedCols) above is enough
 
 // ...existing code...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
