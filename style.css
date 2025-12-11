@@ -726,3 +726,16 @@ button.btn-form-action:hover, button.btn-form-action:active{
     outline: none;
 }
 
+
+
+
+
+
+
+/* For å kunne ha mellomrom mellom avsnitt*/
+
+.flashcards .card .card-front-text,
+.flashcards .card .card-back-text {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}

@@ -171,8 +171,12 @@ function load_flashcards() {
     for (let i = 0; i < filtered.length; i++) {
         let data = filtered[i];
         let fc_item = flashcard_item.clone(true);
-        fc_item.find(`.card-front-text`).text(data.question)
-        fc_item.find(`.card-back-text`).text(data.answer)
+        
+
+       // Preserve line breaks by converting \n to <br>
+        fc_item.find(`.card-front-text`).html(data.question.replace(/\n/g, '<br>'))
+        fc_item.find(`.card-back-text`).html(data.answer.replace(/\n/g, '<br>'))
+                
         fc_item[0].dataset.id = data.id
         flashcardContainer.append(fc_item)
 
